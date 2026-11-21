@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Coast Cover Studio — GTA-style cover art maker</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">NC</span>
+    <div>
+      <h1>Neon Coast Cover Studio</h1>
+      <p>Turn your photo into GTA-style cover art. Pick a layout, drop in a photo, write the caption, export the PNG.</p>
+    </div>
+  </div>
+</header>
+<main class="studio">
+  <section class="panel controls" aria-label="Cover controls">
+    <h2>1 · Layout</h2>
+    <div class="segmented" role="group" aria-label="Cover layout">
+      <button type="button" data-layout="grid" class="active">Cover Grid</button>
+      <button type="button" data-layout="snapshots">Snapshots</button>
+      <button type="button" data-layout="fullbleed">Full Bleed</button>
+    </div>
+    <p class="hint">Cover Grid is the multi-panel poster. Snapshots is a polaroid stack. Full Bleed is one hero shot.</p>
+
+    <h2>2 · Photo</h2>
+    <label class="upload">Upload your photo
+      <input id="photo" type="file" accept="image/*">
+    </label>
+    <div class="samples" role="group" aria-label="Built-in sample scenes">
+      <span>Or try a built-in scene:</span>
+      <button type="button" data-scene="boulevard">Sunset Boulevard</button>
+      <button type="button" data-scene="pier">Neon Pier</button>
+      <button type="button" data-scene="beach">Vice Beach</button>
+    </div>
+    <p class="hint">Your photo never leaves this machine — it is read in your browser and drawn straight onto the cover.</p>
+
+    <h2>3 · Crop &amp; position</h2>
+    <label>Zoom <input id="zoom" type="range" min="100" max="260" value="130"> <output id="zoomOut">130%</output></label>
+    <label>Pan left–right <input id="panX" type="range" min="-50" max="50" value="0"> <output id="panXOut">0</output></label>
+    <label>Pan up–down <input id="panY" type="range" min="-50" max="50" value="0"> <output id="panYOut">0</output></label>
+    <p class="hint">In Cover Grid the same photo is cropped a different way into each of the 8 panels. Pick one panel to preview its crop:</p>
+    <div class="panels" role="group" aria-label="Panel to preview">
+      <button type="button" data-panel="0" class="active">1</button>
+      <button type="button" data-panel="1">2</button>
+      <button type="button" data-panel="2">3</button>
+      <button type="button" data-panel="3">4</button>
+      <button type="button" data-panel="4">5</button>
+      <button type="button" data-panel="5">6</button>
+      <button type="button" data-panel="6">7</button>
+      <button type="button" data-panel="7">8</button>
+    </div>
+
+    <h2>4 · Words</h2>
+    <label>Headline <input id="caption" type="text" maxlength="32" value="Neon Coast"></label>
+    <label>Tagline <input id="subcaption" type="text" maxlength="48" value="Chase the sunset. Own the night."></label>
+
+    <h2>5 · Colour grade</h2>
+    <div class="grades" role="group" aria-label="Colour grade">
+      <button type="button" data-grade="sunset" class="active"><span class="swatch sunset"></span>Sunset</button>
+      <button type="button" data-grade="neon"><span class="swatch neon"></span>Neon</button>
+      <button type="button" data-grade="vice"><span class="swatch vice"></span>Vice Pink</button>
+    </div>
+
+    <h2>6 · Export PNG</h2>
+    <div class="exports">
+      <button type="button" data-export="1080x1080">1080 × 1080 · Square</button>
+      <button type="button" data-export="1080x1350">1080 × 1350 · Portrait</button>
+      <button type="button" data-export="1920x1080">1920 × 1080 · Wide</button>
+    </div>
+    <p id="status" role="status">Ready — pick a layout and a photo.</p>
+  </section>
+
+  <section class="preview" aria-label="Live preview">
+    <div class="preview-head">
+      <h2>Live preview</h2>
+      <span id="sizeLabel">1080 × 1080</span>
+    </div>
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover preview"></canvas>
+    <p class="hint">What you see is what the PNG will be — same panels, same lettering, same grade.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
